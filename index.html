@@ -26,7 +26,6 @@
     width: 100%;
     height: 100%;
     border: none;
-    display: none;
   }
 
   .overlay {
@@ -39,6 +38,7 @@
     font-size: 42px;
     font-weight: bold;
     cursor: pointer;
+    z-index: 2;
   }
 </style>
 </head>
@@ -48,23 +48,32 @@
 <h2>Click-through Video Proof of Concept</h2>
 
 <div class="video-wrapper">
-  <iframe
-    id="video"
-    src="https://www.youtube.com/embed/f7qdT2PIVTo"
-    allow="encrypted-media; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  <div id="player"></div>
 
-  <div class="overlay" id="overlay">Title Card</div>
+  <div class="overlay" id="overlay">
+    Title Card
+  </div>
 </div>
 
-<script>
-  const overlay = document.getElementById("overlay");
-  const video = document.getElementById("video");
+<script src="https://www.youtube.com/iframe_api"></script>
 
-  overlay.addEventListener("click", () => {
-    overlay.style.display = "none";
-    video.style.display = "block";
+<script>
+  let player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      videoId: "f7qdT2PIVTo",
+      playerVars: {
+        autoplay: 0,
+        rel: 0,
+        modestbranding: 1
+      }
+    });
+  }
+
+  document.getElementById("overlay").addEventListener("click", () => {
+    document.getElementById("overlay").style.display = "none";
+    player.playVideo();
   });
 </script>
 
