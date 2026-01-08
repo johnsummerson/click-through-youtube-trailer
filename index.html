@@ -47,33 +47,25 @@
 
 <h2>Click-through Video Proof of Concept</h2>
 
-<div class="video-wrapper">
-  <div id="player"></div>
-
-  <div class="overlay" id="overlay">
-    Title Card
-  </div>
+<div class="video-wrapper" id="wrapper">
+  <div class="overlay" id="overlay">Title Card</div>
 </div>
 
-<script src="https://www.youtube.com/iframe_api"></script>
-
 <script>
-  let player;
+  const overlay = document.getElementById("overlay");
+  const wrapper = document.getElementById("wrapper");
 
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player("player", {
-      videoId: "f7qdT2PIVTo",
-      playerVars: {
-        autoplay: 0,
-        rel: 0,
-        modestbranding: 1
-      }
-    });
-  }
+  overlay.addEventListener("click", () => {
+    overlay.remove();
 
-  document.getElementById("overlay").addEventListener("click", () => {
-    document.getElementById("overlay").style.display = "none";
-    player.playVideo();
+    const iframe = document.createElement("iframe");
+    iframe.src =
+      "https://www.youtube.com/embed/f7qdT2PIVTo?autoplay=1&rel=0";
+    iframe.allow =
+      "autoplay; encrypted-media; picture-in-picture";
+    iframe.allowFullscreen = true;
+
+    wrapper.appendChild(iframe);
   });
 </script>
 
