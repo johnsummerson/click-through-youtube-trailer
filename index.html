@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Click-through Video Demo</title>
+
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #f4f4f4;
+    padding: 40px;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 640px;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: auto;
+    background: #000;
+  }
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Click-through Video Proof of Concept</h2>
+
+<div class="video-wrapper">
+  <iframe
+    id="video"
+    src="https://www.youtube.com/embed/f7qdT2PIVTo"
+    allow="encrypted-media; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+  <div class="overlay" id="overlay">Title Card</div>
+</div>
+
+<script>
+  const overlay = document.getElementById("overlay");
+  const video = document.getElementById("video");
+
+  overlay.addEventListener("click", () => {
+    overlay.style.display = "none";
+    video.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
